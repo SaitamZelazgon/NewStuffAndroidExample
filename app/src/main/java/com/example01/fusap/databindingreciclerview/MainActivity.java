@@ -7,8 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -33,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
     public static final String TAG = "Main";
     private CampionsListAdapter mAdapter;
     private RecyclerView rcw;
-    private ProgressDialog progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +57,7 @@ public class MainActivity extends AppCompatActivity {
         mAdapter = new CampionsListAdapter();
 
         rcw.setItemAnimator(new DefaultItemAnimator());
-
-        progressBar = new ProgressDialog(this);
-        progressBar.setMessage(getString(R.string.loading));
+        rcw.setAdapter(mAdapter);
     }
 
     // This method will be called when a MessageEvent is posted (in the UI thread for Toast)
@@ -67,76 +66,71 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, event.message, Toast.LENGTH_LONG).show();
     }
 
-    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
-    public void newItemsArrived(DataArrivedEvent event) {
-        progressBar.cancel();
-        rcw.setAdapter(mAdapter);
-    }
-
     @Override
     protected void onStart() {
         super.onStart();
         EventBus.getDefault().register(this);
         EventBus.getDefault().register(mAdapter);
 
-        progressBar.show();
-        //Aatrox.png
-
         // Request a string response from the provided URL.
-        JSONObject response = new JSONObject();
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
-                "https://global.api.pvp.net/api/lol/static-data/las/v1.2/champion?locale=en_US&champData=image,lore,stats&api_key=bdab9731-453d-400b-9b78-1ed18b613db5",
-                response,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        new AsyncTask<JSONObject, Void, Void>() {
-                            @Override
-                            protected Void doInBackground(JSONObject... params) {
-                                JSONObject response = params[0];
-                                try {
-                                    Iterator<String> it = response.getJSONObject("data").keys();
+        if (ConnectionSingleton.getSession().getChampionDao().count() == 0) {
+            JSONObject response = new JSONObject();
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
+                    "https://global.api.pvp.net/api/lol/static-data/las/v1.2/champion?locale=en_US&champData=image,lore,stats&api_key=bdab9731-453d-400b-9b78-1ed18b613db5",
+                    response,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            new AsyncTask<JSONObject, Void, Void>() {
+                                @Override
+                                protected Void doInBackground(JSONObject... params) {
+                                    JSONObject response = params[0];
+                                    try {
+                                        Iterator<String> it = response.getJSONObject("data").keys();
 
-                                    for (; it.hasNext(); ) {
-                                        String championName = it.next();
-                                        String imageUrl = "http://ddragon.leagueoflegends.com/cdn/5.14.1/img/champion/" + response.getJSONObject("data").getJSONObject(championName).getJSONObject("image").getString("full");
-                                        String lore = response.getJSONObject("data").getJSONObject(championName).getString("lore");
-                                        Long id = response.getJSONObject("data").getJSONObject(championName).getLong("id");
+                                        for (; it.hasNext(); ) {
+                                            String championName = it.next();
+                                            String imageUrl = "http://ddragon.leagueoflegends.com/cdn/5.14.1/img/champion/" + response.getJSONObject("data").getJSONObject(championName).getJSONObject("image").getString("full");
+                                            String lore = response.getJSONObject("data").getJSONObject(championName).getString("lore");
+                                            Long id = response.getJSONObject("data").getJSONObject(championName).getLong("id");
 
-                                        Champion champion = new Champion();
-                                        champion.setLore(lore);
-                                        champion.setImageUrl(imageUrl);
-                                        champion.setName(championName);
-                                        champion.setRiotApiId(id);
+                                            Champion champion = new Champion();
+                                            champion.setLore(lore);
+                                            champion.setImageUrl(imageUrl);
+                                            champion.setName(championName);
+                                            champion.setRiotApiId(id);
 
-                                        if (ConnectionSingleton.getSession().getChampionDao().queryBuilder().where(ChampionDao.Properties.RiotApiId.eq(id)).count() == 0)
                                             ConnectionSingleton.getSession().getChampionDao().insert(champion);
+                                        }
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
                                     }
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
+                                    return null;
                                 }
-                                return null;
-                            }
 
-                            @Override
-                            protected void onPostExecute(Void v) {
-                                EventBus.getDefault().postSticky(new DataArrivedEvent());
-                            }
-                        }.execute(response);
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        EventBus.getDefault().postSticky(new MessageEvent("Connection Error."));
-                        EventBus.getDefault().postSticky(new DataArrivedEvent());
-                    }
-                }) {
-        };
+                                @Override
+                                protected void onPostExecute(Void v) {
+                                    EventBus.getDefault().postSticky(new DataArrivedEvent());
+                                }
+                            }.execute(response);
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            EventBus.getDefault().postSticky(new MessageEvent("Connection Error."));
+                        }
+                    }) {
+            };
 
-        // Add the request to the RequestQueue.
-        jsonObjectRequest.setTag(TAG);
-        NetworkCacheSingleton.getQueue().add(jsonObjectRequest);
+            // Add the request to the RequestQueue.
+            jsonObjectRequest.setTag(TAG);
+            jsonObjectRequest.setShouldCache(true);
+            jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(5000,
+                    15,
+                    2f));
+            NetworkCacheSingleton.getQueue().add(jsonObjectRequest);
+        }
     }
 
     @Override
@@ -144,7 +138,6 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
         EventBus.getDefault().unregister(this);
         EventBus.getDefault().unregister(mAdapter);
-        progressBar.cancel();
     }
 
 }
