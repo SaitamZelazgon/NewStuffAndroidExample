@@ -1,36 +1,22 @@
 package com.example01.fusap.databindingreciclerview;
 
-import android.os.AsyncTask;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.RetryPolicy;
-import com.android.volley.TimeoutError;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
 import com.example01.fusap.databindingreciclerview.Events.DataArrivedEvent;
-import com.example01.fusap.databindingreciclerview.Events.MessageEvent;
 import com.example01.fusap.databindingreciclerview.Utils.ConnectionSingleton;
 import com.example01.fusap.databindingreciclerview.Utils.ImageLoaderSingleton;
-import com.example01.fusap.databindingreciclerview.Utils.NetworkCacheSingleton;
 import com.example01.fusap.databindingreciclerview.entities.Champion;
-import com.example01.fusap.databindingreciclerview.entities.ChampionDao;
 
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.Iterator;
 
 /**
  * Created by fusap on 7/9/16.
@@ -49,10 +35,20 @@ public class CampionsListAdapter extends RecyclerView.Adapter<CampionsListAdapte
 
     @Override
     public void onBindViewHolder(CampionsListAdapter.ViewHolder holder, int position) {
-        Champion c = ConnectionSingleton.getSession().getChampionDao().load(new Long(position + 1));
+        final Champion c = ConnectionSingleton.getSession().getChampionDao().load(new Long(position + 1));
 
-        holder.textView.setText(Html.fromHtml(c.getLore()));
+        holder.textView.setText(Html.fromHtml(c.getName()));
         holder.image.setImageUrl(c.getImageUrl(), ImageLoaderSingleton.getInstance().getImageLoader());
+
+        holder.image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(),StatsActivity.class);
+                intent.putExtra("imageUrl",c.getImageUrl());
+
+                v.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)

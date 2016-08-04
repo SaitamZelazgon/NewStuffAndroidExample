@@ -1,13 +1,11 @@
 package com.example01.fusap.databindingreciclerview;
 
-import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -21,7 +19,7 @@ import com.example01.fusap.databindingreciclerview.Utils.ConnectionSingleton;
 import com.example01.fusap.databindingreciclerview.Utils.ImageLoaderSingleton;
 import com.example01.fusap.databindingreciclerview.Utils.NetworkCacheSingleton;
 import com.example01.fusap.databindingreciclerview.entities.Champion;
-import com.example01.fusap.databindingreciclerview.entities.ChampionDao;
+import com.example01.fusap.databindingreciclerview.entities.ChampionStats;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -90,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
 
                                         for (; it.hasNext(); ) {
                                             String championName = it.next();
-                                            String imageUrl = "http://ddragon.leagueoflegends.com/cdn/5.14.1/img/champion/" + response.getJSONObject("data").getJSONObject(championName).getJSONObject("image").getString("full");
+                                            String imageUrl = "http://ddragon.leagueoflegends.com/cdn/5.14.1/img/champion/" + response.getJSONObject("data").getJSONObject(championName).getJSONObject("image").getString("sprite");
                                             String lore = response.getJSONObject("data").getJSONObject(championName).getString("lore");
                                             Long id = response.getJSONObject("data").getJSONObject(championName).getLong("id");
 
@@ -99,6 +97,30 @@ public class MainActivity extends AppCompatActivity {
                                             champion.setImageUrl(imageUrl);
                                             champion.setName(championName);
                                             champion.setRiotApiId(id);
+
+                                            ChampionStats stats = new ChampionStats();
+                                            stats.setArmor(response.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("armor"));
+                                            stats.setArmorperlevel( response.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("armorperlevel"));
+                                            stats.setAttackdamage(response.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("attackdamage"));
+                                            stats.setAttackdamageperlevel(response.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("attackdamageperlevel"));
+                                            stats.setAttackrange(response.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("attackrange"));
+                                            stats.setAttackspeedoffset(response.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("attackspeedoffset"));
+                                            stats.setAttackspeedperlevel(response.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("attackspeedperlevel"));
+                                            stats.setCrit(response.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("crit"));
+                                            stats.setCritperlevel(response.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("critperlevel"));
+                                            stats.setHp(response.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("hp"));
+                                            stats.setHpperlevel(response.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("hpperlevel"));
+                                            stats.setHpregen(response.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("hpregen"));
+                                            stats.setHpregenperlevel(response.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("hpregenperlevel"));
+                                            stats.setMovespeed(response.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("movespeed"));
+                                            stats.setMp(response.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("mp"));
+                                            stats.setMpperlevel(response.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("mpperlevel"));
+                                            stats.setMpregen(response.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("mpregen"));
+                                            stats.setMpregenperlevel(response.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("mpregenperlevel"));
+                                            stats.setSpellblock(response.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("spellblock"));
+                                            stats.setSpellblockperlevel(response.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("spellblockperlevel"));
+
+                                            champion.setAtributes(stats);
 
                                             ConnectionSingleton.getSession().getChampionDao().insert(champion);
                                         }
