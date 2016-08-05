@@ -59,7 +59,7 @@ public class ChampionStatsDao extends AbstractDao<ChampionStats, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"CHAMPION_STATS\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
-                "\"ARMOR\" REAL UNIQUE ," + // 1: armor
+                "\"ARMOR\" REAL," + // 1: armor
                 "\"ARMORPERLEVEL\" REAL," + // 2: armorperlevel
                 "\"ATTACKDAMAGE\" REAL," + // 3: attackdamage
                 "\"ATTACKDAMAGEPERLEVEL\" REAL," + // 4: attackdamageperlevel

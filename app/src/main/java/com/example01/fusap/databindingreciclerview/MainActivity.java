@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         EventBus.getDefault().register(mAdapter);
 
         // Request a string response from the provided URL.
-        if (ConnectionSingleton.getSession().getChampionDao().count() == 0) {
+
             JSONObject response = new JSONObject();
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
                     "https://global.api.pvp.net/api/lol/static-data/las/v1.2/champion?locale=en_US&champData=image,lore,stats&api_key=bdab9731-453d-400b-9b78-1ed18b613db5",
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
 
                                         for (; it.hasNext(); ) {
                                             String championName = it.next();
-                                            String imageUrl = "http://ddragon.leagueoflegends.com/cdn/5.14.1/img/champion/" + response.getJSONObject("data").getJSONObject(championName).getJSONObject("image").getString("sprite");
+                                            String imageUrl = "http://ddragon.leagueoflegends.com/cdn/5.14.1/img/champion/" + response.getJSONObject("data").getJSONObject(championName).getJSONObject("image").getString("full");
                                             String lore = response.getJSONObject("data").getJSONObject(championName).getString("lore");
                                             Long id = response.getJSONObject("data").getJSONObject(championName).getLong("id");
 
@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
                     15,
                     2f));
             NetworkCacheSingleton.getQueue().add(jsonObjectRequest);
-        }
+
     }
 
     @Override

@@ -11,10 +11,12 @@ import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
 import com.example01.fusap.databindingreciclerview.Events.DataArrivedEvent;
+import com.example01.fusap.databindingreciclerview.Events.TranfersChampionEvent;
 import com.example01.fusap.databindingreciclerview.Utils.ConnectionSingleton;
 import com.example01.fusap.databindingreciclerview.Utils.ImageLoaderSingleton;
 import com.example01.fusap.databindingreciclerview.entities.Champion;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -40,12 +42,22 @@ public class CampionsListAdapter extends RecyclerView.Adapter<CampionsListAdapte
         holder.textView.setText(Html.fromHtml(c.getName()));
         holder.image.setImageUrl(c.getImageUrl(), ImageLoaderSingleton.getInstance().getImageLoader());
 
+        holder.textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EventBus.getDefault().postSticky(new TranfersChampionEvent(c));
+                Intent i = new Intent(v.getContext(), LoreActivity.class);
+                v.getContext().startActivity(i);
+            }
+        });
+
         holder.image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(),StatsActivity.class);
                 intent.putExtra("imageUrl",c.getImageUrl());
-
+                intent.putExtra("nameChampion",c.getName());
+                intent.putExtra("lore",c.getLore());
                 v.getContext().startActivity(intent);
             }
         });

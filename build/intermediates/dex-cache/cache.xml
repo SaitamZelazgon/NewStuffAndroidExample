@@ -1,2 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
+
+    <item
+        jar="/home/fusap/.gradle/caches/modules-2/files-2.1/org.greenrobot/eventbus/3.0.0/ddd99896e9569eaababbe81b35d80e1b91c4ad85/eventbus-3.0.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="ddd99896e9569eaababbe81b35d80e1b91c4ad85">
+        <dex dex="/home/fusap/NewStuffAndroidExample/app/build/intermediates/pre-dexed/debug/eventbus-3.0.0_8e7e3708a3848b532d8fc5a60d9d51d94e3c08ec.jar" />
+    </item>
+    <item
+        jar="/home/fusap/NewStuffAndroidExample/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.4.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
+        <dex dex="/home/fusap/NewStuffAndroidExample/app/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-23.4.0_8e527f73309bd3ca903f1d42c075bfd72f76dafb.jar" />
+    </item>
+    <item
+        jar="/home/fusap/NewStuffAndroidExample/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.4.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
+        <dex dex="/home/fusap/NewStuffAndroidExample/app/build/intermediates/pre-dexed/debug/com.android.support-support-vector-drawable-23.4.0_8289ab7c795928fb17b0536f890122176cc2ba32.jar" />
+    </item>
+    <item
+        jar="/home/fusap/NewStuffAndroidExample/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
+        <dex dex="/home/fusap/NewStuffAndroidExample/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.4.0_c905c6432bcf3d5f872f58e49c420656060c83d1.jar" />
+    </item>
+    <item
+        jar="/home/fusap/.gradle/caches/modules-2/files-2.1/org.greenrobot/greendao-api/3.0.0/9170fafb15855927b2e131e4fb7ac47dede441b7/greendao-api-3.0.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="9170fafb15855927b2e131e4fb7ac47dede441b7">
+        <dex dex="/home/fusap/NewStuffAndroidExample/app/build/intermediates/pre-dexed/debug/greendao-api-3.0.0_c38976bb7158df498db5e931bccb1679aec8aefc.jar" />
+    </item>
+    <item
+        jar="/home/fusap/NewStuffAndroidExample/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
+        <dex dex="/home/fusap/NewStuffAndroidExample/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.4.0_1837e7450b299b7341251ba7bcddafb007a28e85.jar" />
+    </item>
+    <item
+        jar="/home/fusap/NewStuffAndroidExample/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.4.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="ec75036c3c52e451d0cde50a5aedaf5fd32354a0">
+        <dex dex="/home/fusap/NewStuffAndroidExample/app/build/intermediates/pre-dexed/debug/com.android.support-recyclerview-v7-23.4.0_33fb9f72b3fdb343d24d33888e9d5b9fdb5d371b.jar" />
+    </item>
+    <item
+        jar="/home/fusap/NewStuffAndroidExample/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/libs/internal_impl-23.4.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
+        <dex dex="/home/fusap/NewStuffAndroidExample/app/build/intermediates/pre-dexed/debug/internal_impl-23.4.0_05b703d9b12bf479f7565d8739b68668fe330ee0.jar" />
+    </item>
+    <item
+        jar="/home/fusap/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/23.4.0/support-annotations-23.4.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
+        <dex dex="/home/fusap/NewStuffAndroidExample/app/build/intermediates/pre-dexed/debug/support-annotations-23.4.0_8158edb1b989e3a631ff98e6b9114f2fe3f5f6fc.jar" />
+    </item>
+    <item
+        jar="/home/fusap/NewStuffAndroidExample/app/build/intermediates/exploded-aar/com.android.support/design/23.4.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="5326d9a850d491714fef8cbfaa9ea3416f0bf0d2">
+        <dex dex="/home/fusap/NewStuffAndroidExample/app/build/intermediates/pre-dexed/debug/com.android.support-design-23.4.0_b62492e75b238069437f797621090f9bb1cf3e33.jar" />
+    </item>
+    <item
+        jar="/home/fusap/.gradle/caches/modules-2/files-2.1/org.greenrobot/greendao/3.0.1/20ec484d992d38d7775a22e43ac40d2d551bb886/greendao-3.0.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="20ec484d992d38d7775a22e43ac40d2d551bb886">
+        <dex dex="/home/fusap/NewStuffAndroidExample/app/build/intermediates/pre-dexed/debug/greendao-3.0.1_0cf7a51f0bb5919d8f7cbcbe2043e6a4572fceb3.jar" />
+    </item>
+    <item
+        jar="/home/fusap/NewStuffAndroidExample/app/build/intermediates/exploded-aar/com.android.volley/volley/1.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="2cd4b982617e544728de0782d718a58ce1b06e3f">
+        <dex dex="/home/fusap/NewStuffAndroidExample/app/build/intermediates/pre-dexed/debug/com.android.volley-volley-1.0.0_9915ebe4ce88c296d7ffac7eae1f86747709a95f.jar" />
+    </item>
+
+</items>

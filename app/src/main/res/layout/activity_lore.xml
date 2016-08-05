@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="350dp"
+    android:layout_marginTop="100dp"
+    android:layout_marginBottom="@dimen/app_bar_height"
+    android:id="@+id/scrollViewStats"
+    tools:context="com.example01.fusap.databindingreciclerview.LoreActivity">
+
+    <TextView
+        android:id="@+id/text_stats"
+        android:layout_width="wrap_content"
+        android:layout_height="450dp"
+        android:layout_margin="@dimen/text_margin"
+        android:background="@android:color/white"
+        android:scrollbars="vertical"
+        android:text="hola"/>
+
+</ScrollView>

@@ -1,9 +1,8 @@
 package com.example01.fusap.databindingreciclerview.entities;
 
 import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Id;
-import org.greenrobot.greendao.annotation.Unique;
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Id;
 
 /**
  * Created by fusap on 8/3/16.
@@ -13,7 +12,6 @@ public class ChampionStats {
     @Id
     private Long id;
 
-    @Unique
     private Double armor;
     private Double armorperlevel;
     private Double attackdamage;
