@@ -8,8 +8,10 @@ import com.example01.fusap.databindingreciclerview.entities.Champion;
 public class TranfersChampionEvent {
 
     public final Champion c;
+    public final Long key;
 
-    public TranfersChampionEvent(Champion c) {
+    public TranfersChampionEvent(Champion c, Long key) {
         this.c = c;
+        this.key = key;
     }
 }

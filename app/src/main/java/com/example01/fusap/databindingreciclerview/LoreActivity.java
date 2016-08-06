@@ -8,19 +8,22 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.example01.fusap.databindingreciclerview.Events.TranfersChampionEvent;
+import com.example01.fusap.databindingreciclerview.Utils.ConnectionSingleton;
+import com.example01.fusap.databindingreciclerview.entities.ChampionStats;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 public class LoreActivity extends Activity {
-
+    TextView statsText;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lore);
+        statsText = (TextView) findViewById(R.id.text_stats);
 
     }
 
@@ -33,27 +36,27 @@ public class LoreActivity extends Activity {
     }
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public void onChampionEvent(TranfersChampionEvent event){
-        TextView stats = (TextView) findViewById(R.id.text_stats);
-        stats.setText("armor:\t" + event.c.getAtributes().getArmor()+ "\n" +
-                      "armorperlevel:\t" + event.c.getAtributes().getArmorperlevel() + "\n" +
-                        "attackdamage:\t" + event.c.getAtributes().getAttackdamage() + "\n" +
-                        "attackdamageperlevel:\t" + event.c.getAtributes().getAttackdamageperlevel() + "\n" +
-                        "attackrange:\t" + event.c.getAtributes().getAttackrange() + "\n" +
-                        "attackspeedoffset:\t" + event.c.getAtributes().getAttackspeedoffset() + "\n" +
-                        "attackspeedperlevel:\t" + event.c.getAtributes().getAttackspeedperlevel() + "\n" +
-                        "crit:\t" + event.c.getAtributes().getCrit() + "\n" +
-                        "critperlevel:\t" + event.c.getAtributes().getCritperlevel() + "\n" +
-                        "hp:\t" + event.c.getAtributes().getHp() + "\n" +
-                        "hpperlevel:\t" + event.c.getAtributes().getHpperlevel() + "\n" +
-                        "hpregen:\t" + event.c.getAtributes().getHpregen() + "\n" +
-                        "hpregenperlevel:\t" + event.c.getAtributes().getHpregenperlevel() + "\n" +
-                        "movespeed:\t" + event.c.getAtributes().getMovespeed() + "\n" +
-                        "mp:\t" + event.c.getAtributes().getMp() + "\n" +
-                        "mpperlevel:\t" + event.c.getAtributes().getMpperlevel() + "\n" +
-                        "mpregen:\t" + event.c.getAtributes().getMpregen() + "\n" +
-                        "mpregenperlevel:\t" + event.c.getAtributes().getMpregenperlevel() + "\n" +
-                        "spellblock:\t" + event.c.getAtributes().getSpellblock() + "\n" +
-                        "spellblockperlevel:\t" + event.c.getAtributes().getSpellblockperlevel());
+       ChampionStats stats = ConnectionSingleton.getSession().getChampionStatsDao().load(event.key);
+        statsText.setText("armor:\t" + stats.getArmor()+ "\n" +
+                      "armorperlevel:\t" + stats.getArmorperlevel() + "\n" +
+                        "attackdamage:\t" + stats.getAttackdamage() + "\n" +
+                        "attackdamageperlevel:\t" + stats.getAttackdamageperlevel() + "\n" +
+                        "attackrange:\t" + stats.getAttackrange() + "\n" +
+                        "attackspeedoffset:\t" + stats.getAttackspeedoffset() + "\n" +
+                        "attackspeedperlevel:\t" + stats.getAttackspeedperlevel() + "\n" +
+                        "crit:\t" + stats.getCrit() + "\n" +
+                        "critperlevel:\t" + stats.getCritperlevel() + "\n" +
+                        "hp:\t" + stats.getHp() + "\n" +
+                        "hpperlevel:\t" + stats.getHpperlevel() + "\n" +
+                        "hpregen:\t" + stats.getHpregen() + "\n" +
+                        "hpregenperlevel:\t" + stats.getHpregenperlevel() + "\n" +
+                        "movespeed:\t" + stats.getMovespeed() + "\n" +
+                        "mp:\t" + stats.getMp() + "\n" +
+                        "mpperlevel:\t" + stats.getMpperlevel() + "\n" +
+                        "mpregen:\t" + stats.getMpregen() + "\n" +
+                        "mpregenperlevel:\t" + stats.getMpregenperlevel() + "\n" +
+                        "spellblock:\t" + stats.getSpellblock() + "\n" +
+                        "spellblockperlevel:\t" + stats.getSpellblockperlevel());
 
     }
 
