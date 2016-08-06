@@ -2,10 +2,11 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="350dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:layout_marginTop="100dp"
     android:layout_marginBottom="@dimen/app_bar_height"
+    android:layout_gravity="center"
     android:id="@+id/scrollViewStats"
     tools:context="com.example01.fusap.databindingreciclerview.LoreActivity">
 
