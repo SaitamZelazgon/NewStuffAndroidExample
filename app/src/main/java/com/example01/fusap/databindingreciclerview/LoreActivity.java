@@ -17,6 +17,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 public class LoreActivity extends Activity {
     TextView statsText;
+    ChampionStats stats;
 
 
     @Override
@@ -36,7 +37,7 @@ public class LoreActivity extends Activity {
     }
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public void onChampionEvent(TranfersChampionEvent event){
-       ChampionStats stats = ConnectionSingleton.getSession().getChampionStatsDao().load(event.key);
+        stats = ConnectionSingleton.getSession().getChampionStatsDao().load(event.key);
         statsText.setText("armor:\t" + stats.getArmor()+ "\n" +
                       "armorperlevel:\t" + stats.getArmorperlevel() + "\n" +
                         "attackdamage:\t" + stats.getAttackdamage() + "\n" +
