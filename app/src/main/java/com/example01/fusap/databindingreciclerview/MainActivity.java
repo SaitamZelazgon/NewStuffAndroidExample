@@ -120,6 +120,8 @@ public class MainActivity extends AppCompatActivity {
                                             stats.setSpellblock(response.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("spellblock"));
                                             stats.setSpellblockperlevel(response.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("spellblockperlevel"));
 
+                                            ConnectionSingleton.getSession().getChampionStatsDao().insert(stats);
+
                                             champion.setAtributes(stats);
 
                                             ConnectionSingleton.getSession().getChampionDao().insert(champion);
