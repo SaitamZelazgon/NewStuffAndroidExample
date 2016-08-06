@@ -22,7 +22,7 @@
             android:label="@string/title_activity_stats"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".LoreActivity"
-                  android:theme="@style/Theme.Transparent"/>
+                  android:theme="@style/Theme.AppCompat.Light.Dialog" />
     </application>
 
 </manifest>

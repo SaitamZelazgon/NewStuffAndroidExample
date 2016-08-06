@@ -1,12 +1,16 @@
 package com.example01.fusap.databindingreciclerview;
 
+import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.support.v4.widget.PopupWindowCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
@@ -20,11 +24,12 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.zip.Inflater;
+
 /**
  * Created by fusap on 7/9/16.
  */
 public class CampionsListAdapter extends RecyclerView.Adapter<CampionsListAdapter.ViewHolder> {
-
     @Override
     public CampionsListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
@@ -45,6 +50,7 @@ public class CampionsListAdapter extends RecyclerView.Adapter<CampionsListAdapte
         holder.textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 EventBus.getDefault().postSticky(new TranfersChampionEvent(c));
                 Intent i = new Intent(v.getContext(), LoreActivity.class);
                 v.getContext().startActivity(i);
@@ -54,10 +60,10 @@ public class CampionsListAdapter extends RecyclerView.Adapter<CampionsListAdapte
         holder.image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(),StatsActivity.class);
-                intent.putExtra("imageUrl",c.getImageUrl());
-                intent.putExtra("nameChampion",c.getName());
-                intent.putExtra("lore",c.getLore());
+                Intent intent = new Intent(v.getContext(), StatsActivity.class);
+                intent.putExtra("imageUrl", c.getImageUrl());
+                intent.putExtra("nameChampion", c.getName());
+                intent.putExtra("lore", c.getLore());
                 v.getContext().startActivity(intent);
             }
         });
@@ -85,4 +91,5 @@ public class CampionsListAdapter extends RecyclerView.Adapter<CampionsListAdapte
             textView = (TextView) ll.findViewById(R.id.champ_lore);
         }
     }
+
 }

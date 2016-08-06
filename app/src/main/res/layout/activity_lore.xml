@@ -4,16 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginTop="100dp"
-    android:layout_marginBottom="@dimen/app_bar_height"
-    android:layout_gravity="center"
+    android:layout_gravity="center_vertical|center_horizontal"
     android:id="@+id/scrollViewStats"
     tools:context="com.example01.fusap.databindingreciclerview.LoreActivity">
 
     <TextView
         android:id="@+id/text_stats"
         android:layout_width="wrap_content"
-        android:layout_height="450dp"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
         android:background="@android:color/white"
         android:scrollbars="vertical"
