@@ -18,11 +18,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".StatsActivity"
+            android:name=".StatsActivityTransparent"
             android:label="@string/title_activity_stats"
+            android:theme="@style/Theme.AppCompat.Light.Dialog" />
+        <activity android:name=".ChampionLoreActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".LoreActivity"
-                  android:theme="@style/Theme.AppCompat.Light.Dialog" />
     </application>
 
 </manifest>

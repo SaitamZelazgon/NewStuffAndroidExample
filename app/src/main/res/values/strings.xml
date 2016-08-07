@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">DatabindingReciclerView</string>
     <string name="loading">Loading...</string>
-    <string name="title_activity_stats">StatsActivity</string>
+    <string name="title_activity_stats">StatsActivityTransparent</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
 

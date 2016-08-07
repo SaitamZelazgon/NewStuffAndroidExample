@@ -52,7 +52,7 @@ public class CampionsListAdapter extends RecyclerView.Adapter<CampionsListAdapte
             public void onClick(View v) {
 
                 EventBus.getDefault().postSticky(new TranfersChampionEvent(c,c.getAtributes().getId()));
-                Intent i = new Intent(v.getContext(), StatsActivity.class);
+                Intent i = new Intent(v.getContext(), StatsActivityTransparent.class);
                 v.getContext().startActivity(i);
             }
         });
@@ -60,7 +60,7 @@ public class CampionsListAdapter extends RecyclerView.Adapter<CampionsListAdapte
         holder.image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), StatsActivity.class);
+                Intent intent = new Intent(v.getContext(), ChampionLoreActivity.class);
                 intent.putExtra("imageUrl", c.getImageUrl());
                 intent.putExtra("nameChampion", c.getName());
                 intent.putExtra("lore", c.getLore());
