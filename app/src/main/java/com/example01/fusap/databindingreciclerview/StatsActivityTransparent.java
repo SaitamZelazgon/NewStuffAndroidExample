@@ -15,7 +15,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-public class LoreActivity extends Activity {
+public class StatsActivityTransparent extends Activity {
     TextView statsText;
     ChampionStats stats;
 
@@ -25,7 +25,6 @@ public class LoreActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lore);
         statsText = (TextView) findViewById(R.id.text_stats);
-
     }
 
     @Override

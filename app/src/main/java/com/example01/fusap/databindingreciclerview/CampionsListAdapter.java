@@ -52,7 +52,7 @@ public class CampionsListAdapter extends RecyclerView.Adapter<CampionsListAdapte
             public void onClick(View v) {
 
                 EventBus.getDefault().postSticky(new TranfersChampionEvent(c,c.getAtributes().getId()));
-                Intent i = new Intent(v.getContext(), LoreActivity.class);
+                Intent i = new Intent(v.getContext(), StatsActivity.class);
                 v.getContext().startActivity(i);
             }
         });

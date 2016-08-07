@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.android.volley.toolbox.NetworkImageView;
 import com.example01.fusap.databindingreciclerview.Utils.ImageLoaderSingleton;
 
-public class StatsActivity extends AppCompatActivity {
+public class ChampionLoreActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
