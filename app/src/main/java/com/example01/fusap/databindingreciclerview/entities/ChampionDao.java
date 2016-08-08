@@ -30,6 +30,7 @@ public class ChampionDao extends AbstractDao<Champion, Long> {
         public final static Property ImageUrl = new Property(2, String.class, "imageUrl", false, "IMAGE_URL");
         public final static Property Lore = new Property(3, String.class, "lore", false, "LORE");
         public final static Property RiotApiId = new Property(4, Long.class, "riotApiId", false, "RIOT_API_ID");
+        public final static Property Read = new Property(5, Boolean.class, "read", false, "READ");
     };
 
     private DaoSession daoSession;
@@ -52,7 +53,8 @@ public class ChampionDao extends AbstractDao<Champion, Long> {
                 "\"NAME\" TEXT UNIQUE ," + // 1: name
                 "\"IMAGE_URL\" TEXT," + // 2: imageUrl
                 "\"LORE\" TEXT," + // 3: lore
-                "\"RIOT_API_ID\" INTEGER);"); // 4: riotApiId
+                "\"RIOT_API_ID\" INTEGER," + // 4: riotApiId
+                "\"READ\" INTEGER);"); // 5: read
     }
 
     /** Drops the underlying database table. */
@@ -89,6 +91,11 @@ public class ChampionDao extends AbstractDao<Champion, Long> {
         if (riotApiId != null) {
             stmt.bindLong(5, riotApiId);
         }
+ 
+        Boolean read = entity.getRead();
+        if (read != null) {
+            stmt.bindLong(6, read ? 1L: 0L);
+        }
     }
 
     @Override
@@ -119,6 +126,11 @@ public class ChampionDao extends AbstractDao<Champion, Long> {
         if (riotApiId != null) {
             stmt.bindLong(5, riotApiId);
         }
+ 
+        Boolean read = entity.getRead();
+        if (read != null) {
+            stmt.bindLong(6, read ? 1L: 0L);
+        }
     }
 
     @Override
@@ -139,7 +151,8 @@ public class ChampionDao extends AbstractDao<Champion, Long> {
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // name
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // imageUrl
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // lore
-            cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4) // riotApiId
+            cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4), // riotApiId
+            cursor.isNull(offset + 5) ? null : cursor.getShort(offset + 5) != 0 // read
         );
         return entity;
     }
@@ -151,6 +164,7 @@ public class ChampionDao extends AbstractDao<Champion, Long> {
         entity.setImageUrl(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setLore(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setRiotApiId(cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4));
+        entity.setRead(cursor.isNull(offset + 5) ? null : cursor.getShort(offset + 5) != 0);
      }
     
     @Override

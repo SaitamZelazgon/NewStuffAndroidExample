@@ -20,6 +20,7 @@ public class Champion {
     private String imageUrl;
     private String lore;
     private Long riotApiId;
+    private Boolean read;
 
     @ToOne(joinProperty = "id")
     private ChampionStats atributes;
@@ -27,11 +28,15 @@ public class Champion {
     @Generated(hash = 1101598407)
     private transient Long atributes__resolvedKey;
 
-    /** Used for active entity operations. */
+    /**
+     * Used for active entity operations.
+     */
     @Generated(hash = 1051364770)
     private transient ChampionDao myDao;
 
-    /** Used to resolve relations */
+    /**
+     * Used to resolve relations
+     */
     @Generated(hash = 2040040024)
     private transient DaoSession daoSession;
 
@@ -75,6 +80,14 @@ public class Champion {
         this.riotApiId = riotApiId;
     }
 
+    public Boolean getRead() {
+        return read;
+    }
+
+    public void setRead(Boolean read) {
+        this.read = read;
+    }
+
     /**
      * Convenient call for {@link org.greenrobot.greendao.AbstractDao#refresh(Object)}.
      * Entity must attached to an entity context.
@@ -111,7 +124,9 @@ public class Champion {
         myDao.delete(this);
     }
 
-    /** called by internal mechanisms, do not call yourself. */
+    /**
+     * called by internal mechanisms, do not call yourself.
+     */
     @Generated(hash = 1874034863)
     public void setAtributes(ChampionStats atributes) {
         synchronized (this) {
@@ -121,7 +136,9 @@ public class Champion {
         }
     }
 
-    /** To-one relationship, resolved on first access. */
+    /**
+     * To-one relationship, resolved on first access.
+     */
     @Generated(hash = 1177783924)
     public ChampionStats getAtributes() {
         Long __key = this.id;
@@ -147,18 +164,19 @@ public class Champion {
         myDao = daoSession != null ? daoSession.getChampionDao() : null;
     }
 
-    @Generated(hash = 1872717816)
-    public Champion(Long id, String name, String imageUrl, String lore,
-            Long riotApiId) {
+    public Champion() {
+
+    }
+
+    @Generated(hash = 1720051751)
+    public Champion(Long id, String name, String imageUrl, String lore, Long riotApiId,
+            Boolean read) {
         this.id = id;
         this.name = name;
         this.imageUrl = imageUrl;
         this.lore = lore;
         this.riotApiId = riotApiId;
-    }
-
-    public Champion(){
-
+        this.read = read;
     }
 
 }
