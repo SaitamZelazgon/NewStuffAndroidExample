@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DatabindingReciclerView</string>
+    <string name="app_name">Prototipo APP</string>
     <string name="loading">Loading...</string>
     <string name="title_activity_stats">StatsActivityTransparent</string>
     <string name="large_text">
